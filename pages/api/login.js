@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
     try {
       // 🔁 Replace this with your actual ngrok HTTPS URL
-      const r = await fetch("https://0448da896fce.ngrok-free.app/log_attempt", {
+      const r = await fetch(" https://witty-llamas-call.loca.lt/log_attempt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(attempt)
