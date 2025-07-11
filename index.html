@@ -80,14 +80,19 @@
       font-size: 0.9rem;
       color: #888;
     }
+
+    .msg {
+      text-align: center;
+      color: #007BFF;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
   <div class="login-container">
     <div class="logo">
-      <!-- Optional logo -->
-      <img src="https://cdn-icons-png.flaticon.com/512/939/939653.png " alt="Admin Logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/939/939653.png" alt="Admin Logo">
     </div>
     <h2>🔒 Secure Login</h2>
     <form id="loginForm">
@@ -101,32 +106,52 @@
       </div>
       <button type="submit">Login</button>
     </form>
+    <div class="msg" id="resultMsg"></div>
     <div class="footer">
       &copy; 2025 Company Security Portal. All rights reserved.
     </div>
   </div>
 
   <script>
-    // Dummy JS to respond to login attempts
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    // Embedded simulation of POST to /api/login
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Simulate server-side check
-      fetch('/login', {
+      // Simulate distributed attack values
+      const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+      const status = Math.random() < 0.2 ? \"success\" : \"failed\";
+      const firewall = \"cloudflare\";
+      const location = \"India\";
+
+      // Simulate the serverless function inline (mocked)
+      const result = handleLogin({
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      }).then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            alert('Login successful!');
-          } else {
-            alert('Invalid credentials.');
-          }
-        });
+        body: { ip, username, password, status, firewall, location }
+      });
+
+      // Print result
+      document.getElementById('resultMsg').textContent = result.message;
+      console.log(\"[SIMULATED /api/login]:\", result.log);
     });
+
+    // Mocked backend handler like /api/login.js
+    function handleLogin(req) {
+      if (req.method === 'POST') {
+        const log = req.body;
+        // Normally you'd forward or store this — here we just log
+        return {
+          message: `Login attempt recorded (${log.status})`,
+          log
+        };
+      } else {
+        return {
+          message: `Method ${req.method} Not Allowed`
+        };
+      }
+    }
   </script>
 
 </body>
