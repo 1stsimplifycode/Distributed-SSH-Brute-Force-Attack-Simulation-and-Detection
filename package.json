@@ -1,10 +1,12 @@
 {
   "name": "distributed-ssh-brute-force-attack-simulation-and-detection",
   "version": "1.0.0",
-  "description": "",
+  "description": "Distributed brute-force detection frontend with Next.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "keywords": [],
   "author": "",
